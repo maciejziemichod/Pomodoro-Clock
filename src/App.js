@@ -1,8 +1,21 @@
 import React from "react";
+import Timer from "./components/Timer";
+import Controllers from "./components/Controllers";
+import Buttons from "./components/Buttons";
+import Footer from "./components/Footer";
 import "./App.css";
-function App() {
-  return <div></div>;
-}
+
+const App = () => {
+  return (
+    <div className="container">
+      <h1 className="title">Pomodoro Clock</h1>
+      <Controllers />
+      <Timer />
+      <Buttons />
+      <Footer />
+    </div>
+  );
+};
 
 export default App;
 
@@ -12,6 +25,7 @@ export default App;
 // https://reactjs.org/docs/hooks-overview.html#effect-hook
 // https://www.freecodecamp.org/learn/front-end-libraries/front-end-libraries-projects/build-a-pomodoro-clock
 // https://codepen.io/freeCodeCamp/full/XpKrrW
+// https://vuejsexamples.com/a-nice-pomodoro-clock-with-vue-js/
 
 // USER STORIES
 

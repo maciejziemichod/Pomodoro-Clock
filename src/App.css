@@ -1,0 +1,20 @@
+/* variables */
+:root {
+  --red: #d9534f;
+  --dark: #bc827c;
+  --light: #fff6f4;
+}
+
+body {
+  background-color: var(--red);
+  color: var(--light);
+}
+
+.container {
+  margin: auto;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
