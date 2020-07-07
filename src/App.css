@@ -17,4 +17,43 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+}
+
+.title {
+}
+
+.controllers {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.controller__title {
+}
+
+.controller__buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 50%;
+  border: solid var(--light) 5px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
 }

@@ -3,7 +3,12 @@ import BreakController from "./BreakController";
 import SessionController from "./SessionController";
 
 const Controllers = () => {
-  return <div></div>;
+  return (
+    <div className="controllers">
+      <BreakController />
+      <SessionController />
+    </div>
+  );
 };
 
 export default Controllers;
