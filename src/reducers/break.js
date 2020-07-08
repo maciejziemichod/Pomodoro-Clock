@@ -1,9 +1,9 @@
-const breakReducer = (state = 5, action) => {
+const breakReducer = (state = 300, action) => {
   switch (action.type) {
-    case "INCREMENT":
-      return state + 1;
-    case "DECREMENT":
-      return state - 1;
+    case "INCREMENT_BREAK":
+      return state + action.payload;
+    case "DECREMENT_BREAK":
+      return state - action.payload;
     default:
       return state;
   }
