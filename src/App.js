@@ -20,8 +20,7 @@ const App = () => {
 export default App;
 
 // NOTES
-
-// https://github.com/styled-components/styled-components
+// animate the circle based on the time
 // https://reactjs.org/docs/hooks-overview.html#effect-hook
 // https://www.freecodecamp.org/learn/front-end-libraries/front-end-libraries-projects/build-a-pomodoro-clock
 // https://codepen.io/freeCodeCamp/full/XpKrrW
