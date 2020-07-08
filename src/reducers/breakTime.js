@@ -4,6 +4,8 @@ const breakTime = (state = 5, action) => {
       return state + 1;
     case "DECREMENT_BREAK":
       return state - 1;
+    case "RESET":
+      return 5;
     default:
       return state;
   }

@@ -4,6 +4,8 @@ const sessionTime = (state = 25, action) => {
       return state + 1;
     case "DECREMENT_SESSION":
       return state - 1;
+    case "RESET":
+      return 25;
     default:
       return state;
   }

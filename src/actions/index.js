@@ -13,3 +13,5 @@ export const sessionTurn = () => ({ type: "SESSION" });
 export const breakTurn = () => ({ type: "BREAK" });
 
 export const reset = () => ({ type: "RESET" });
+
+export const resetReset = () => ({ type: "RESET_RESET" });

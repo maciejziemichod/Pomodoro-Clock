@@ -1,43 +1,55 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { decrementSession, decrementBreak } from "../actions";
+import { sessionTurn, breakTurn } from "../actions";
 
 const Timer = () => {
-  const sessionTime = useSelector((state) => state.session);
-  const breakTime = useSelector((state) => state.break);
-  const setSessionTime = useSelector((state) => state.setSession);
-  const setBreakTime = useSelector((state) => state.setBreak);
-  let time = calcTime(sessionTime);
-  const shouldRun = useSelector((state) => state.togglePlay);
+  const display = useSelector((state) => state.turn);
+  const breakTime = useSelector((state) => state.breakTime);
+  const sessionTime = useSelector((state) => state.sessionTime);
+  const isRunning = useSelector((state) => state.isRunning);
+  const didReset = useSelector((state) => state.reset);
+  const whichTime = display === "SESSION" ? sessionTime * 60 : breakTime * 60;
+  const [time, setTime] = useState(whichTime);
+  const timer = calcTime(time);
   const dispatch = useDispatch();
-  let display = "Session";
 
-  
-  if (sessionTime === 0) {
-    dispatch({ type: "INCREMENT_SESSION" });
-    setTimeout(() => {
-
-      
-      display = "Break";
-      time = calcTime(breakTime);
-    }, 1000);
-  }
-
+  // Changing break/session length
   useEffect(() => {
-    if (shouldRun && sessionTime !== 0 && display === "Session") {
+    if (!isRunning) {
+      setTime(whichTime);
+    }
+  }, [whichTime, didReset]);
+
+  // Changing from/to session/break
+  useEffect(() => {
+    if (time === 0) {
+      if (display === "SESSION") {
+        dispatch(breakTurn());
+        setTime(breakTime * 60);
+      } else {
+        dispatch(sessionTurn());
+        setTime(sessionTime * 60);
+      }
+    }
+  });
+
+  // Timer
+  useEffect(() => {
+    if (isRunning && time !== 0 && !didReset) {
       const interval = setInterval(() => {
-        dispatch(decrementSession());
+        setTime(time - 1);
       }, 1000);
+
       return () => {
         clearInterval(interval);
       };
     }
-  });
+  }, [didReset, isRunning, time]);
 
   return (
     <div className="timer">
       <div id="timer-label">{display}</div>
-      <div id="time-left">{time}</div>
+      <div id="time-left">{timer}</div>
     </div>
   );
 };

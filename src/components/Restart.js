@@ -5,7 +5,13 @@ import { reset } from "../actions";
 const Restart = () => {
   const dispatch = useDispatch();
   return (
-    <button className="button" id="reset" onClick={() => dispatch(reset())}>
+    <button
+      className="button"
+      id="reset"
+      onClick={() => {
+        dispatch(reset());
+      }}
+    >
       Reset
     </button>
   );
