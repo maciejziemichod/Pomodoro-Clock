@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { decrementSession } from "../actions";
+import { decrementSession, decrementBreak } from "../actions";
 
 const Timer = () => {
   const sessionTime = useSelector((state) => state.session);
   const time = calcTime(sessionTime);
-  const dispatch = useDispatch();
   const shouldRun = useSelector((state) => state.togglePlay);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (shouldRun) {
+    if (shouldRun && sessionTime !== 0) {
       const interval = setInterval(() => {
-        dispatch(decrementSession(1));
+        dispatch(decrementSession());
       }, 1000);
       return () => {
         clearInterval(interval);

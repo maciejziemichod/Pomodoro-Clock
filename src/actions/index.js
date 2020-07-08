@@ -1,21 +1,15 @@
-export const incrementSession = (payload) => ({
-  type: "INCREMENT_SESSION",
-  payload,
-});
+export const decrementSession = () => ({ type: "DECREMENT_SESSION" });
 
-export const decrementSession = (payload) => ({
-  type: "DECREMENT_SESSION",
-  payload,
-});
+export const decrementBreak = () => ({ type: "DECREMENT_BREAK" });
 
-export const incrementBreak = (payload) => ({
-  type: "INCREMENT_BREAK",
-  payload,
-});
+export const incrementSetSession = () => ({ type: "INCREMENT_SET_SESSION" });
 
-export const decrementBreak = (payload) => ({
-  type: "DECREMENT_BREAK",
-  payload,
-});
+export const decrementSetSession = () => ({ type: "DECREMENT_SET_SESSION" });
+
+export const incrementSetBreak = () => ({ type: "INCREMENT_SET_BREAK" });
+
+export const decrementSetBreak = () => ({ type: "DECREMENT_SET_BREAK" });
 
 export const togglePlay = () => ({ type: "TOGGLE_PLAY" });
+
+export const reset = () => ({ type: "RESET" });
