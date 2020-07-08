@@ -4,12 +4,27 @@ import { decrementSession, decrementBreak } from "../actions";
 
 const Timer = () => {
   const sessionTime = useSelector((state) => state.session);
-  const time = calcTime(sessionTime);
+  const breakTime = useSelector((state) => state.break);
+  const setSessionTime = useSelector((state) => state.setSession);
+  const setBreakTime = useSelector((state) => state.setBreak);
+  let time = calcTime(sessionTime);
   const shouldRun = useSelector((state) => state.togglePlay);
   const dispatch = useDispatch();
+  let display = "Session";
+
+  
+  if (sessionTime === 0) {
+    dispatch({ type: "INCREMENT_SESSION" });
+    setTimeout(() => {
+
+      
+      display = "Break";
+      time = calcTime(breakTime);
+    }, 1000);
+  }
 
   useEffect(() => {
-    if (shouldRun && sessionTime !== 0) {
+    if (shouldRun && sessionTime !== 0 && display === "Session") {
       const interval = setInterval(() => {
         dispatch(decrementSession());
       }, 1000);
@@ -21,7 +36,7 @@ const Timer = () => {
 
   return (
     <div className="timer">
-      <div id="timer-label">Session/Break</div>
+      <div id="timer-label">{display}</div>
       <div id="time-left">{time}</div>
     </div>
   );

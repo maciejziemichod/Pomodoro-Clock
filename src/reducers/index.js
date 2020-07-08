@@ -1,16 +1,14 @@
-import breakReducer from "./break";
-import sessionReducer from "./session";
-import togglePlayReducer from "./togglePlay";
-import setBreakReducer from "./setBreak";
-import setSessionReducer from "./setSession";
+import isRunning from "./isRunning";
+import breakTime from "./breakTime";
+import sessionTime from "./sessionTime";
+import turn from "./turn";
 import { combineReducers } from "redux";
 
 const appReducer = combineReducers({
-  break: breakReducer,
-  setBreak: setBreakReducer,
-  session: sessionReducer,
-  setSession: setSessionReducer,
-  togglePlay: togglePlayReducer,
+  breakTime,
+  sessionTime,
+  isRunning,
+  turn,
 });
 
 // It lets reset the state. When I give state of undefined, reducers use their default state

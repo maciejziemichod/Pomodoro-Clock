@@ -1,17 +1,18 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { togglePlay } from "../actions";
+import { toggle } from "../actions";
 
 const StartStop = () => {
-  const isPlaying = useSelector((state) => state.togglePlay);
+  const isRunning = useSelector((state) => state.isRunning);
   const dispatch = useDispatch();
+
   return (
     <button
       className="button"
       id="start_stop"
-      onClick={() => dispatch(togglePlay())}
+      onClick={() => dispatch(toggle())}
     >
-      {isPlaying ? "Stop" : "Start"}
+      {isRunning ? "Stop" : "Start"}
     </button>
   );
 };

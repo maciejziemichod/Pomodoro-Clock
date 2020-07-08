@@ -1,17 +1,19 @@
 import React from "react";
+import { decrementSession, incrementSession } from "../actions";
 import { useSelector, useDispatch } from "react-redux";
-import { incrementSetSession, decrementSetSession } from "../actions";
 
 const SessionController = () => {
-  const sessionTime = useSelector((state) => state.setSession);
-  const isRunning = useSelector((state) => state.togglePlay);
+  const sessionTime = useSelector((state) => state.sessionTime);
+  const isRunning = useSelector((state) => state.isRunning);
   const dispatch = useDispatch();
 
+  // Securing that session won't be less than 1 and bigger than 60
+  // and that you can't change it when timer is running
   const change = (type) => {
-    if (type === "increment" && sessionTime < 60 && !isRunning) {
-      dispatch(incrementSetSession());
-    } else if (type === "decrement" && sessionTime > 1 && !isRunning) {
-      dispatch(decrementSetSession());
+    if (type === "INCREMENT" && sessionTime < 60 && !isRunning) {
+      dispatch(incrementSession());
+    } else if (type === "DECREMENT" && sessionTime > 1 && !isRunning) {
+      dispatch(decrementSession());
     }
   };
 
@@ -21,11 +23,11 @@ const SessionController = () => {
         Session Length
       </div>
       <div className="controller__buttons">
-        <button id="session-decrement" onClick={() => change("decrement")}>
+        <button id="session-decrement" onClick={() => change("DECREMENT")}>
           arrow down
         </button>
         <div id="session-length">{sessionTime}</div>
-        <button id="session-increment" onClick={() => change("increment")}>
+        <button id="session-increment" onClick={() => change("INCREMENT")}>
           arrow up
         </button>
       </div>

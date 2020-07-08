@@ -1,15 +1,15 @@
 export const decrementSession = () => ({ type: "DECREMENT_SESSION" });
 
+export const incrementSession = () => ({ type: "INCREMENT_SESSION" });
+
 export const decrementBreak = () => ({ type: "DECREMENT_BREAK" });
 
-export const incrementSetSession = () => ({ type: "INCREMENT_SET_SESSION" });
+export const incrementBreak = () => ({ type: "INCREMENT_BREAK" });
 
-export const decrementSetSession = () => ({ type: "DECREMENT_SET_SESSION" });
+export const toggle = () => ({ type: "TOGGLE" });
 
-export const incrementSetBreak = () => ({ type: "INCREMENT_SET_BREAK" });
+export const sessionTurn = () => ({ type: "SESSION" });
 
-export const decrementSetBreak = () => ({ type: "DECREMENT_SET_BREAK" });
-
-export const togglePlay = () => ({ type: "TOGGLE_PLAY" });
+export const breakTurn = () => ({ type: "BREAK" });
 
 export const reset = () => ({ type: "RESET" });
