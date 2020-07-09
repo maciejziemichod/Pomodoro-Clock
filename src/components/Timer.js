@@ -1,7 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import useInterval from "../hooks/useInterval";
 import { useSelector, useDispatch } from "react-redux";
-import { sessionTurn, breakTurn, decrementTime, setTime } from "../actions";
+import {
+  sessionTurn,
+  breakTurn,
+  decrementTime,
+  setTime,
+  resetReset,
+} from "../actions";
 
 const Timer = () => {
   const turn = useSelector((state) => state.turn);
@@ -9,6 +15,7 @@ const Timer = () => {
   const sessionTime = useSelector((state) => state.sessionTime);
   const isRunning = useSelector((state) => state.isRunning);
   const timer = useSelector((state) => state.timer);
+  const didReset = useSelector((state) => state.didReset);
   const dispatch = useDispatch();
   const audio = useRef();
 
@@ -51,7 +58,14 @@ const Timer = () => {
       audio.current.currentTime = 0;
       audio.current.play();
     }
-  }, [timer]);
+
+    // Stop beeping when reset
+    if (didReset) {
+      audio.current.pause();
+      audio.current.currentTime = 0;
+      dispatch(resetReset());
+    }
+  }, [timer, didReset]);
 
   return (
     <div className="timer">
