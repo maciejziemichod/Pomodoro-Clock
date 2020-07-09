@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import useInterval from "../hooks/useInterval";
 import { useSelector, useDispatch } from "react-redux";
 import { sessionTurn, breakTurn, decrementTime, setTime } from "../actions";
@@ -10,6 +10,7 @@ const Timer = () => {
   const isRunning = useSelector((state) => state.isRunning);
   const timer = useSelector((state) => state.timer);
   const dispatch = useDispatch();
+  const audio = useRef();
 
   // Custom hook to set interval
   useInterval(
@@ -44,10 +45,24 @@ const Timer = () => {
     }
   }, [turn, breakTime]);
 
+  // Beep
+  useEffect(() => {
+    if (timer === 0) {
+      audio.current.currentTime = 0;
+      audio.current.play();
+    }
+  }, [timer]);
+
   return (
     <div className="timer">
       <div id="timer-label">{turn}</div>
       <div id="time-left">{calcTime(timer)}</div>
+      <audio
+        id="beep"
+        preload="auto"
+        src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
+        ref={audio}
+      ></audio>
     </div>
   );
 };
