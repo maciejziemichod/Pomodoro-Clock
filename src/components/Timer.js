@@ -1,57 +1,52 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import useInterval from "../hooks/useInterval";
 import { useSelector, useDispatch } from "react-redux";
-import { sessionTurn, breakTurn } from "../actions";
+import { sessionTurn, breakTurn, decrementTime, setTime } from "../actions";
 
 const Timer = () => {
-  const display = useSelector((state) => state.turn);
+  const turn = useSelector((state) => state.turn);
   const breakTime = useSelector((state) => state.breakTime);
   const sessionTime = useSelector((state) => state.sessionTime);
   const isRunning = useSelector((state) => state.isRunning);
-  const didReset = useSelector((state) => state.reset);
-  const whichTime = display === "SESSION" ? sessionTime * 60 : breakTime * 60;
-  const [time, setTime] = useState(whichTime);
-  const timer = calcTime(time);
+  const timer = useSelector((state) => state.timer);
   const dispatch = useDispatch();
 
-  // Changing break/session length
-  useEffect(() => {
-    if (!isRunning) {
-      setTime(whichTime);
-    }
-  }, [whichTime, didReset]);
-
-  // Changing from/to session/break
-  useEffect(() => {
-    if (time === 0) {
-      if (display === "SESSION") {
-        dispatch(breakTurn());
-        setTime(breakTime * 60);
-      } else {
-        dispatch(sessionTurn());
-        setTime(sessionTime * 60);
+  useInterval(
+    () => {
+      if (timer > 0) {
+        dispatch(decrementTime());
       }
-    }
-  });
 
-  // NOTE
-  // I think I will need to rewrite how the time is calculated, so that it's not separate from redux store
-  // Timer
+      // Change turn
+      if (timer === 0) {
+        if (turn === "SESSION") {
+          dispatch(breakTurn());
+        } else if (turn === "BREAK") {
+          dispatch(sessionTurn());
+        }
+      }
+    },
+    isRunning ? 1000 : null // null makes interval stop
+  );
+
+  // Change timer when session time changes during session or when turn changes
   useEffect(() => {
-    if (isRunning && time !== 0 && !didReset) {
-      const interval = setInterval(() => {
-        setTime(time - 1);
-      }, 1000);
-
-      return () => {
-        clearInterval(interval);
-      };
+    if (turn === "SESSION") {
+      dispatch(setTime(sessionTime * 60));
     }
-  }, [didReset, isRunning, time]);
+  }, [turn, sessionTime]);
+
+  // Change timer when break time changes during break or when turn changes
+  useEffect(() => {
+    if (turn === "BREAK") {
+      dispatch(setTime(breakTime * 60));
+    }
+  }, [turn, breakTime]);
 
   return (
     <div className="timer">
-      <div id="timer-label">{display}</div>
-      <div id="time-left">{timer}</div>
+      <div id="timer-label">{turn}</div>
+      <div id="time-left">{calcTime(timer)}</div>
     </div>
   );
 };
