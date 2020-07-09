@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { toggle, resetReset } from "../actions";
+import { toggle /* resetReset */ } from "../actions";
 
 const StartStop = () => {
   const isRunning = useSelector((state) => state.isRunning);
@@ -10,10 +10,7 @@ const StartStop = () => {
     <button
       className="button"
       id="start_stop"
-      onClick={() => {
-        dispatch(toggle());
-        dispatch(resetReset());
-      }}
+      onClick={() => dispatch(toggle())}
     >
       {isRunning ? "Stop" : "Start"}
     </button>

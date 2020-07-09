@@ -33,6 +33,8 @@ const Timer = () => {
     }
   });
 
+  // NOTE
+  // I think I will need to rewrite how the time is calculated, so that it's not separate from redux store
   // Timer
   useEffect(() => {
     if (isRunning && time !== 0 && !didReset) {

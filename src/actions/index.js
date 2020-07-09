@@ -14,4 +14,8 @@ export const breakTurn = () => ({ type: "BREAK" });
 
 export const reset = () => ({ type: "RESET" });
 
-export const resetReset = () => ({ type: "RESET_RESET" });
+export const setTime = (payload) => ({ type: "SET_TIME", payload });
+
+export const decrementTime = () => ({ type: "DECREMENT_TIME" });
+
+// export const resetReset = () => ({ type: "RESET_RESET" });
