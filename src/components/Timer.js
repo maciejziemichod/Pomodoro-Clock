@@ -11,6 +11,7 @@ const Timer = () => {
   const timer = useSelector((state) => state.timer);
   const dispatch = useDispatch();
 
+  // Custom hook to set interval
   useInterval(
     () => {
       if (timer > 0) {

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { toggle /* resetReset */ } from "../actions";
+import { toggle } from "../actions";
 
 const StartStop = () => {
   const isRunning = useSelector((state) => state.isRunning);
