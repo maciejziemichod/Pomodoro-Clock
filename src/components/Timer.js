@@ -8,6 +8,11 @@ import {
   setTime,
   resetReset,
 } from "../actions";
+import {
+  CircularProgressbarWithChildren,
+  buildStyles,
+} from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 const Timer = () => {
   const turn = useSelector((state) => state.turn);
@@ -69,14 +74,27 @@ const Timer = () => {
 
   return (
     <div className="timer">
-      <div id="timer-label">{turn}</div>
-      <div id="time-left">{calcTime(timer)}</div>
-      <audio
-        id="beep"
-        preload="auto"
-        src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
-        ref={audio}
-      ></audio>
+      <CircularProgressbarWithChildren
+        counterClockwise
+        value={timer}
+        minValue={0}
+        maxValue={turn === "SESSION" ? sessionTime * 60 : breakTime * 60}
+        strokeWidth={4}
+        styles={buildStyles({
+          strokeLinecap: "round",
+          pathColor: "#fff6f4",
+          trailColor: "#bc827c",
+        })}
+      >
+        <div id="timer-label">{turn}</div>
+        <div id="time-left">{calcTime(timer)}</div>
+        <audio
+          id="beep"
+          preload="auto"
+          src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
+          ref={audio}
+        ></audio>
+      </CircularProgressbarWithChildren>
     </div>
   );
 };

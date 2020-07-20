@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Merienda+One&display=swap");
+
 /* variables */
 :root {
   --red: #d9534f;
@@ -8,6 +10,7 @@
 body {
   background-color: var(--red);
   color: var(--light);
+  font-family: "Merienda One", cursive;
 }
 
 .container {
@@ -21,39 +24,72 @@ body {
 }
 
 .title {
+  font-size: 3.5rem;
 }
 
 .controllers {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
 }
 
+.controller__card {
+  width: 100%;
+  margin: 1rem 2rem;
+}
+
 .controller__title {
+  font-size: 1.8rem;
 }
 
 .controller__buttons {
+  font-size: 1.6rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex-direction: row;
 }
 
 .timer {
   display: flex;
+  font-size: 2rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 20rem;
-  height: 20rem;
+  width: 17rem;
+  height: 17rem;
   border-radius: 50%;
-  border: solid var(--light) 5px;
+  margin-bottom: 2rem;
 }
 
 .buttons {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex-direction: row;
+}
+
+.button {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--red);
+  border: 1px solid var(--dark) !important;
+  border-radius: 1rem;
+  border: none;
+  box-shadow: 5px 5px 10px #00000033;
+  margin: 0.5rem;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.button > svg > path {
+  fill: var(--light);
 }
