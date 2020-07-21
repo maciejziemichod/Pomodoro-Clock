@@ -93,3 +93,9 @@ body {
 .button > svg > path {
   fill: var(--light);
 }
+
+@media (max-width: 860px) {
+  .container {
+    width: 100%;
+  }
+}
